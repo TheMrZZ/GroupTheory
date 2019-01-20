@@ -1,7 +1,7 @@
 // Don't remove: it allows webpack to understand it should compile the CSS file
 import './style.css'
 
-import {getEuclideanTable, createEquationProduct} from './actions'
+import {createEuclideanTable, createEquationProduct, createFindInverse, createFindPrimes} from './actions'
 
 function resizeInputs() {
   for (const input of document.getElementsByTagName('input')) {
@@ -15,7 +15,9 @@ function resizeInputs() {
 
 // When the document is ready
 document.addEventListener('DOMContentLoaded', function () {
-  getEuclideanTable()
+  createEuclideanTable()
   createEquationProduct()
+  createFindInverse()
+  createFindPrimes()
   resizeInputs()
 })

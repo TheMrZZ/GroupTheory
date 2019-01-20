@@ -25,21 +25,51 @@
     <div id="euclidean-result"></div>
   </div>
 
-  <!-- Equation dans ℤ/nℤ ⊙ -->
+  <!-- Equation in (ℤ/nℤ, ⊕, ⊙) -->
   <div class="algo" id="equation-product">
-    <h1>Equation dans ℤ/nℤ type a ⊙ x = b</h1>
+    <h1>Equation dans (ℤ/nℤ, ⊕, ⊙)</h1>
     <form action="javascript:void(0)">
       <label>ℤ/<input type="number" required>ℤ</label>
       <br>
 
-      <label><input type="number" required></label>
+      <label><input class="overline" type="number" required></label>
       ⊙
       <label class="overline">x</label>
       =
-      <label><input type="number" required></label>
+      <label><input class="overline" type="number" required></label>
 
       <br>
-      <button type="submit">Lancer l'algorithme !</button>
+      <button type="submit">Résoudre l'équation !</button>
+    </form>
+
+    <!-- Result -->
+    <div></div>
+  </div>
+
+  <!-- In (ℤ/nℤ, ⊕, ⊙), inverse of a number -->
+  <div class="algo" id="find-inverse">
+    <h1>Inverse de <span class="overline">x</span> dans (ℤ/nℤ, ⊕, ⊙)</h1>
+    <div>x doit être premier avec n pour être inversible.</div>
+    <form action="javascript:void(0)">
+      <label>ℤ/<input type="number" required>ℤ</label>
+      <br>
+      <label><span class="overline">x</span> = <input class="overline" type="number" required></label>
+      <br>
+      <button type="submit">Trouver les premiers !</button>
+    </form>
+
+    <!-- Result -->
+    <div></div>
+  </div>
+
+  <!-- In (ℤ/nℤ, ⊕, ⊙), list of numbers prime with n - which are numbers with an inverse -->
+  <div class="algo" id="primes-list">
+    <h1>Nombres premiers avec n dans (ℤ/nℤ, ⊕, ⊙)</h1>
+    <div>Ces nombres sont aussi les nombres inversibles dans l'anneau.</div>
+    <form action="javascript:void(0)">
+      <label>ℤ/<input type="number" required>ℤ</label>
+      <br>
+      <button type="submit">Trouver les premiers !</button>
     </form>
 
     <!-- Result -->

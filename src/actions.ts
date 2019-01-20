@@ -1,5 +1,5 @@
-import { euclideanExtendedAlgorithm, resolveEquationProduct } from './algorithms'
-import { r } from './constants'
+import { euclideanExtendedAlgorithm, resolveEquationProduct, inverse, findAllPrimes } from './algorithms'
+import { u, v, r } from './constants'
 
 function getChildrenByTagName (element: HTMLElement, tagName: string) {
   return (
@@ -9,7 +9,7 @@ function getChildrenByTagName (element: HTMLElement, tagName: string) {
   )
 }
 
-export function getEuclideanTable () {
+export function createEuclideanTable () {
   const resultDiv = document.getElementById('euclidean-result') as HTMLDivElement
   const form = document.getElementById('algorithm-form') as HTMLFormElement
   const number1 = getChildrenByTagName(form, 'input')[0] as HTMLInputElement
@@ -48,6 +48,15 @@ export function getEuclideanTable () {
     }
 
     resultDiv.appendChild(table)
+
+    let equation = document.createElement('div')
+    const result_u = result[u].get(-2), result_v = result[v].get(-2), gcd = result[r].get(-2)
+
+    equation.innerHTML = `u=${result_u}, v=${result_v}, pgcd(a,b)=${gcd} <br>
+                          a×u + b×v = pgcd(a, b) <br>
+                          ${a} × ${result_u} + ${b} × ${result_v} = ${gcd}`
+
+    resultDiv.appendChild(equation)
   }
 }
 
@@ -60,18 +69,57 @@ export function createEquationProduct () {
     const a = getChildrenByTagName(form, 'input')[1] as HTMLInputElement
     const b = getChildrenByTagName(form, 'input')[2] as HTMLInputElement
 
-    // Equation is, on ℤ/nℤ, a ⊙ x = b (a & b given), find x
+    // Equation is, on (ℤ/nℤ, ⊕, ⊙) , a ⊙ x = b (a & b given), find x
     let x = resolveEquationProduct(parseInt(n.value), parseInt(a.value), parseInt(b.value))
     let result = ''
     if (x.length === 0) {
       result = 'Aucun résultat.'
     } else if (x.length === 1) {
-      result = `Un seul résultat: <span class=overline>x</span> = <span class=overline>${x[0]}</span>`
+      result = `Un seul résultat: <span class="overline">x</span> = <span class="overline">${x[0]}</span>`
     } else {
-      result = 'Plusieurs résultats: <span class=overline>' + x.join('</span>, <span class=overline>') + '</span>'
+      result = 'Plusieurs résultats: <span class="overline">' + x.join('</span>, <span class="overline">') + '</span>'
     }
 
     const resultDiv = getChildrenByTagName(equationProduct, 'div')[0] as HTMLDivElement
+    resultDiv.innerHTML = result
+  }
+}
+
+// Find inverse of x in (ℤ/nℤ, ⊕, ⊙)
+export function createFindInverse () {
+  const findInverseDiv = document.getElementById('find-inverse') as HTMLDivElement
+  const form = getChildrenByTagName(findInverseDiv, 'form')[0] as HTMLFormElement
+
+  form.onsubmit = function () {
+    const n = getChildrenByTagName(findInverseDiv, 'input')[0] as HTMLInputElement
+    const x = getChildrenByTagName(findInverseDiv, 'input')[1] as HTMLInputElement
+    const inv = inverse(parseInt(x.value), parseInt(n.value))
+
+    let result = ''
+    if (inv === null) {
+      result = `<span class="overline">${parseInt(x.value)}</span> n'est pas inversible dans (ℤ/${parseInt(n.value)}ℤ, ⊕, ⊙).`
+    } else {
+      result = `<span class="overline">x</span><sup>-1</sup> = <span class="overline">${inv}</span>`
+    }
+
+    const resultDiv = getChildrenByTagName(findInverseDiv, 'div')[1]
+    resultDiv.innerHTML = result
+  }
+}
+
+// Find all numbers prime with n in (ℤ/nℤ, ⊕, ⊙)
+export function createFindPrimes () {
+  const primesListElement = document.getElementById('primes-list') as HTMLDivElement
+  const form = getChildrenByTagName(primesListElement, 'form')[0] as HTMLFormElement
+  const resultDiv = getChildrenByTagName(primesListElement, 'div')[1] as HTMLDivElement
+
+  form.onsubmit = function () {
+    const n = parseInt((getChildrenByTagName(form, 'input')[0] as HTMLInputElement).value)
+    const primes = findAllPrimes(n)
+
+    let result = `Les nombres premiers (et inversibles) dans (ℤ/${n}ℤ, ⊕, ⊙) sont:<br>`
+    result += '[' + primes.map(p => `<span class=overline>${p}</span>`).join(', ') + ']'
+
     resultDiv.innerHTML = result
   }
 }
