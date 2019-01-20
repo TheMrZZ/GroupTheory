@@ -164,6 +164,7 @@ export function createPhi () {
     const phi = factors.reduce((phi, factor) => phi * (1 - 1 / factor[0]), 1) * x
 
     resultDiv.innerHTML = `
+      ${x} = ${factors.map(l => l[0] + '<sup>' + l[1] + '</sup>').join(' × ')}<br>
       φ = ${x} × ${factors.map(factor => `(1 - 1/${factor[0]})`).join(' × ')} <br>
       φ = ${Math.round(phi)}
     `
