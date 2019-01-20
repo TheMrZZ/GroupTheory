@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Théorie des Groupes</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="./dist/app.bundle.js"></script>
+</head>
+
+<body>
+
+  <!-- Algo étendu d'Euclide -->
+  <div class="algo">
+    <h1>Algorithme Étendu d'Euclide</h1>
+    <form id="algorithm-form" action="javascript:void(0)">
+      <label>a = <input type="number" required></label>
+      <label>b = <input type="number" required></label>
+      <br>
+      <button type="submit" id="launch-algorithm">Lancer l'algorithme !</button>
+    </form>
+
+    <!-- Result -->
+    <div id="euclidean-result"></div>
+  </div>
+
+  <!-- Equation dans ℤ/nℤ ⊙ -->
+  <div class="algo" id="equation-product">
+    <h1>Equation dans ℤ/nℤ type a ⊙ x = b</h1>
+    <form action="javascript:void(0)">
+      <label>ℤ/<input type="number" required>ℤ</label>
+      <br>
+
+      <label><input type="number" required></label>
+      ⊙
+      <label class="overline">x</label>
+      =
+      <label><input type="number" required></label>
+
+      <br>
+      <button type="submit">Lancer l'algorithme !</button>
+    </form>
+
+    <!-- Result -->
+    <div></div>
+  </div>
+
+</body>
+
+</html>
