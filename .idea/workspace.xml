@@ -4,11 +4,7 @@
     <list default="true" id="f9362242-1e70-4f44-91a5-a64f1f714a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/app.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/app.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -63,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/actions.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="142" column="51" selection-start-line="142" selection-start-column="51" selection-end-line="142" selection-end-column="51" />
+            <state relative-caret-position="222">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#0#105#0" expanded="true" />
               </folding>
@@ -125,8 +121,9 @@
       <find>color: red</find>
       <find>is</find>
       <find>createFindPrimes</find>
-      <find>.join</find>
       <find>result.get</find>
+      <find>.join</find>
+      <find>parseIn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,7 +191,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.startup.tasks" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
     <property name="ts.external.directory.path" value="C:\Users\Florian\WebstormProjects\GroupTheory\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -263,7 +260,7 @@
       <workItem from="1547651659895" duration="4873000" />
       <workItem from="1547761070299" duration="598000" />
       <workItem from="1548013114638" duration="4613000" />
-      <workItem from="1548017878689" duration="7723000" />
+      <workItem from="1548017878689" duration="8397000" />
     </task>
     <task id="LOCAL-00001" summary="Added 2 new algo: find all primes &amp; find inverse of a number">
       <created>1548021690720</created>
@@ -272,11 +269,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548021690720</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added phi &amp; number of whole numbers with an inverse in a ring">
+      <created>1548026395607</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548026395607</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23373000" />
+    <option name="totallyTimeSpent" value="24047000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -286,7 +290,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2671141" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.3297587" />
+      <window_info anchor="bottom" id="Messages" weight="0.3297587" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3297587" />
@@ -296,7 +300,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="TypeScript" order="9" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3297587" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3297587" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -322,7 +326,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added 2 new algo: find all primes &amp; find inverse of a number" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added 2 new algo: find all primes &amp; find inverse of a number" />
+    <MESSAGE value="Added phi &amp; number of whole numbers with an inverse in a ring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added phi &amp; number of whole numbers with an inverse in a ring" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/package-lock.json">
@@ -429,8 +434,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actions.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="142" column="51" selection-start-line="142" selection-start-column="51" selection-end-line="142" selection-end-column="51" />
+        <state relative-caret-position="222">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="e#0#105#0" expanded="true" />
           </folding>

@@ -15,19 +15,21 @@ function getChildrenByTagName (element: HTMLElement, tagName: string) {
   )
 }
 
+function inputValue (input: Element) {
+  return parseInt((input as HTMLInputElement).value)
+}
+
 export function createEuclideanTable () {
   const resultDiv = document.getElementById('euclidean-result') as HTMLDivElement
   const form = document.getElementById('algorithm-form') as HTMLFormElement
-  const number1 = getChildrenByTagName(form, 'input')[0] as HTMLInputElement
-  const number2 = getChildrenByTagName(form, 'input')[1] as HTMLInputElement
 
   form.onsubmit = function () {
     let table = document.createElement('table')
     resultDiv.innerHTML = ''
     table.innerHTML = '<tr><th>u</th><th>v</th><th>q</th><th>r</th></tr>'
 
-    let a = parseInt(number1.value)
-    let b = parseInt(number2.value)
+    const a = inputValue(getChildrenByTagName(form, 'input')[0])
+    const b = inputValue(getChildrenByTagName(form, 'input')[1])
 
     let result = euclideanExtendedAlgorithm(a, b)
 
@@ -72,7 +74,7 @@ export function createFactorization () {
   const resultDiv = getChildrenByTagName(factorizationElement, 'div')[0] as HTMLDivElement
 
   form.onsubmit = function () {
-    const x = parseInt((getChildrenByTagName(form,  'input')[0] as HTMLInputElement).value)
+    const x = inputValue(getChildrenByTagName(form, 'input')[0])
     const result = primeFactorization(x)
 
     resultDiv.innerHTML = `
@@ -86,17 +88,22 @@ export function createEquationProduct () {
   const form = getChildrenByTagName(equationProduct, 'form')[0] as HTMLFormElement
 
   form.onsubmit = function () {
-    const n = getChildrenByTagName(form, 'input')[0] as HTMLInputElement
-    const a = getChildrenByTagName(form, 'input')[1] as HTMLInputElement
-    const b = getChildrenByTagName(form, 'input')[2] as HTMLInputElement
+    const n = inputValue(getChildrenByTagName(form, 'input')[0])
+    const a = inputValue(getChildrenByTagName(form, 'input')[1])
+    const b = inputValue(getChildrenByTagName(form, 'input')[2])
 
     // Equation is, on (ℤ/nℤ, ⊕, ⊙) , a ⊙ x = b (a & b given), find x
-    let x = resolveEquationProduct(parseInt(n.value), parseInt(a.value), parseInt(b.value))
+    let x = resolveEquationProduct(n, a, b)
     let result = ''
     if (x.length === 0) {
       result = 'Aucun résultat.'
     } else if (x.length === 1) {
-      result = `Un seul résultat: <span class="overline">x</span> = <span class="overline">${x[0]}</span>`
+      const inv = inverse(a, n)
+      result = `
+        ${inv} ⊙ ${a} ⊙ x = ${inv} ⊙ ${b}<br>
+        x = ${x[0]}<br>
+        Un seul résultat: <span class="overline">x</span> = <span class="overline">${x[0]}</span>
+      `
     } else {
       result = 'Plusieurs résultats: <span class="overline">' + x.join('</span>, <span class="overline">') + '</span>'
     }
@@ -112,13 +119,13 @@ export function createFindInverse () {
   const form = getChildrenByTagName(findInverseDiv, 'form')[0] as HTMLFormElement
 
   form.onsubmit = function () {
-    const n = getChildrenByTagName(findInverseDiv, 'input')[0] as HTMLInputElement
-    const x = getChildrenByTagName(findInverseDiv, 'input')[1] as HTMLInputElement
-    const inv = inverse(parseInt(x.value), parseInt(n.value))
+    const n = inputValue(getChildrenByTagName(findInverseDiv, 'input')[0])
+    const x = inputValue(getChildrenByTagName(findInverseDiv, 'input')[1])
+    const inv = inverse(x, n)
 
     let result = ''
     if (inv === null) {
-      result = `<span class="overline">${parseInt(x.value)}</span> n'est pas inversible dans (ℤ/${parseInt(n.value)}ℤ, ⊕, ⊙).`
+      result = `<span class="overline">${x}</span> n'est pas inversible dans (ℤ/${n}ℤ, ⊕, ⊙).`
     } else {
       result = `<span class="overline">x</span><sup>-1</sup> = <span class="overline">${inv}</span>`
     }
@@ -135,7 +142,7 @@ export function createFindPrimes () {
   const resultDiv = getChildrenByTagName(primesListElement, 'div')[1] as HTMLDivElement
 
   form.onsubmit = function () {
-    const n = parseInt((getChildrenByTagName(form, 'input')[0] as HTMLInputElement).value)
+    const n = inputValue(getChildrenByTagName(form, 'input')[0])
     const primes = findAllPrimes(n)
 
     let result = `Les nombres premiers (et inversibles) dans (ℤ/${n}ℤ, ⊕, ⊙) sont:<br>`
@@ -152,9 +159,9 @@ export function createPhi () {
   const resultDiv = getChildrenByTagName(phiElement, 'div')[1] as HTMLDivElement
 
   form.onsubmit = function () {
-    const x = parseInt((getChildrenByTagName(form,  'input')[0] as HTMLInputElement).value)
+    const x = inputValue(getChildrenByTagName(form, 'input')[0])
     const factors = primeFactorization(x)
-    const phi = factors.reduce((phi, factor) => phi * (1 - 1/factor[0]), 1) * x
+    const phi = factors.reduce((phi, factor) => phi * (1 - 1 / factor[0]), 1) * x
 
     resultDiv.innerHTML = `
       φ = ${x} × ${factors.map(factor => `(1 - 1/${factor[0]})`).join(' × ')} <br>
