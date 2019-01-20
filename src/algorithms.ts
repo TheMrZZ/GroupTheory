@@ -85,7 +85,12 @@ export function inverse (x: number, n: number): number | null {
   }
 
   // Inverse of a number x in (ℤ/nℤ, ⊕, ⊙) is u, so that x*u + n*v = 1
-  return euclideanExtendedAlgorithm(x, n)[u].get(-2)
+  const inv = euclideanExtendedAlgorithm(x, n)[u].get(-2)
+
+  if (inv > 0) {
+    return inv
+  }
+  return inv + n
 }
 
 // Find all numbers prime with n in (ℤ/nℤ, ⊕, ⊙)
@@ -98,4 +103,31 @@ export function findAllPrimes (n: number) {
   }
 
   return result
+}
+
+// Find all prime factors of a number
+function primeFactorizationRec (n: number, result: number[][]): number[][] {
+  const root = Math.sqrt(n)
+  let factor = 2
+
+  if (n % factor) {
+    factor = 3
+
+    while ((n % factor) && ((factor = (factor + 2)) < root)) {}
+  }
+
+  factor = (factor <= root) ? factor : n
+
+  if (result.length < 1 || result.get(-1)[0] !== factor) {
+    result.push([factor, 1])
+  } else {
+    result.get(-1)[1]++
+  }
+
+  return (factor === n) ? result : primeFactorizationRec((n / factor), result)
+}
+
+// Find all prime factors of a number
+export function primeFactorization (x: number) {
+  return primeFactorizationRec(x, [])
 }

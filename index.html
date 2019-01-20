@@ -25,6 +25,19 @@
     <div id="euclidean-result"></div>
   </div>
 
+  <!-- Factorization of x -->
+  <div class="algo" id="factorization">
+    <h1>Factorisation de n</h1>
+    <form action="javascript:void(0)">
+      <label>x = <input type="number" required></label>
+      <br>
+      <button type="submit">Trouver la factorisation !</button>
+    </form>
+
+    <!-- Result -->
+    <div></div>
+  </div>
+
   <!-- Equation in (ℤ/nℤ, ⊕, ⊙) -->
   <div class="algo" id="equation-product">
     <h1>Equation dans (ℤ/nℤ, ⊕, ⊙)</h1>
@@ -66,6 +79,22 @@
   <div class="algo" id="primes-list">
     <h1>Nombres premiers avec n dans (ℤ/nℤ, ⊕, ⊙)</h1>
     <div>Ces nombres sont aussi les nombres inversibles dans l'anneau.</div>
+    <form action="javascript:void(0)">
+      <label>ℤ/<input type="number" required>ℤ</label>
+      <br>
+      <button type="submit">Trouver les premiers !</button>
+    </form>
+
+    <!-- Result -->
+    <div></div>
+  </div>
+
+  <!-- In (ℤ/nℤ, ⊕, ⊙), size of R_n -->
+  <div class="algo" id="phi">
+    <h1>φ - Nombre d'inversibles dans (ℤ/nℤ, ⊕, ⊙)</h1>
+    <div>φ représente la taille de R<sub>n</sub>, l'ensemble des nombres inversibles dans (ℤ/nℤ, ⊕, ⊙).<br>
+         C'est aussi le nombre d'entiers premiers avec n dans l'anneau (ℤ/nℤ, ⊕, ⊙).
+    </div>
     <form action="javascript:void(0)">
       <label>ℤ/<input type="number" required>ℤ</label>
       <br>

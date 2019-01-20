@@ -1,4 +1,10 @@
-import { euclideanExtendedAlgorithm, resolveEquationProduct, inverse, findAllPrimes } from './algorithms'
+import {
+  euclideanExtendedAlgorithm,
+  resolveEquationProduct,
+  inverse,
+  findAllPrimes,
+  primeFactorization
+} from './algorithms'
 import { u, v, r } from './constants'
 
 function getChildrenByTagName (element: HTMLElement, tagName: string) {
@@ -60,6 +66,21 @@ export function createEuclideanTable () {
   }
 }
 
+export function createFactorization () {
+  const factorizationElement = document.getElementById('factorization') as HTMLDivElement
+  const form = getChildrenByTagName(factorizationElement, 'form')[0] as HTMLFormElement
+  const resultDiv = getChildrenByTagName(factorizationElement, 'div')[0] as HTMLDivElement
+
+  form.onsubmit = function () {
+    const x = parseInt((getChildrenByTagName(form,  'input')[0] as HTMLInputElement).value)
+    const result = primeFactorization(x)
+
+    resultDiv.innerHTML = `
+    ${x} = ${result.map(l => l[0] + '<sup>' + l[1] + '</sup>').join(' × ')}
+    `
+  }
+}
+
 export function createEquationProduct () {
   const equationProduct = document.getElementById('equation-product') as HTMLDivElement
   const form = getChildrenByTagName(equationProduct, 'form')[0] as HTMLFormElement
@@ -118,8 +139,26 @@ export function createFindPrimes () {
     const primes = findAllPrimes(n)
 
     let result = `Les nombres premiers (et inversibles) dans (ℤ/${n}ℤ, ⊕, ⊙) sont:<br>`
-    result += '[' + primes.map(p => `<span class=overline>${p}</span>`).join(', ') + ']'
-
+    result += '[' + primes.map(p => `<span class="overline">${p}</span>`).join(', ') + ']<br>'
+    result += `On en déduit que φ = ${primes.length}`
     resultDiv.innerHTML = result
+  }
+}
+
+// Find φ (phi), the number of whole numbers with an inverse in (ℤ/nℤ, ⊕, ⊙)
+export function createPhi () {
+  const phiElement = document.getElementById('phi') as HTMLDivElement
+  const form = getChildrenByTagName(phiElement, 'form')[0] as HTMLFormElement
+  const resultDiv = getChildrenByTagName(phiElement, 'div')[1] as HTMLDivElement
+
+  form.onsubmit = function () {
+    const x = parseInt((getChildrenByTagName(form,  'input')[0] as HTMLInputElement).value)
+    const factors = primeFactorization(x)
+    const phi = factors.reduce((phi, factor) => phi * (1 - 1/factor[0]), 1) * x
+
+    resultDiv.innerHTML = `
+      φ = ${x} × ${factors.map(factor => `(1 - 1/${factor[0]})`).join(' × ')} <br>
+      φ = ${Math.round(phi)}
+    `
   }
 }
