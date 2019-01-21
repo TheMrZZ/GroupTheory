@@ -100,8 +100,8 @@ export function createEquationProduct () {
     } else if (x.length === 1) {
       const inv = inverse(a, n)
       result = `
-        ${inv} ⊙ ${a} ⊙ x = ${inv} ⊙ ${b}<br>
-        x = ${x[0]}<br>
+        <span class="overline">${inv}</span> ⊙ <span class="overline">${a}</span> ⊙ <span class="overline">x</span> = <span class="overline">${inv}</span> ⊙ <span class="overline">${b}</span><br>
+        <span class="overline">x</span> = <span class="overline">${x[0]}</span><br>
         Un seul résultat: <span class="overline">x</span> = <span class="overline">${x[0]}</span>
       `
     } else {

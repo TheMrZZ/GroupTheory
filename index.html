@@ -4,107 +4,143 @@
 <head>
   <meta charset="UTF-8">
   <title>Théorie des Groupes</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js"
+          integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
   <script src="./dist/app.bundle.js"></script>
 </head>
 
 <body>
+  <nav class="nav nav-tabs nav-fill navbar-light bg-light fixed-top" id="navbar">
+    <a class="nav-item nav-link active" href="#euler-algorithm">Algorithme d'Euler</a>
+    <a class="nav-item nav-link" href="#factorization">Factorisation</a>
+    <a class="nav-item nav-link" href="#equation-product"><span class="overline">a</span> ⊙ <span
+        class="overline">x</span> = <span class="overline">b</span></a>
+    <a class="nav-item nav-link" href="#find-inverse">Inverse de <span class="overline">x</span></a>
+    <a class="nav-item nav-link" href="#primes-list">Nombres premiers avec n</a>
+    <a class="nav-item nav-link" href="#phi">φ - Nombre d'inversibles</a>
+  </nav>
 
-  <!-- Algo étendu d'Euclide -->
-  <div class="algo">
-    <h1>Algorithme Étendu d'Euclide</h1>
-    <form id="algorithm-form" action="javascript:void(0)">
-      <label>a = <input type="number" required></label>
-      <label>b = <input type="number" required></label>
-      <br>
-      <button type="submit" id="launch-algorithm">Lancer l'algorithme !</button>
-    </form>
+  <div>
+    <!-- Algo étendu d'Euclide -->
+    <div class="algo active" id="euler-algorithm">
+      <h1>Algorithme Étendu d'Euclide</h1>
+      <form id="algorithm-form" action="javascript:void(0)">
+        <label>a = <input type="number" required></label>
+        <label>b = <input type="number" required></label>
+        <br>
+        <button type="submit" id="launch-algorithm">Lancer l'algorithme !</button>
+      </form>
 
-    <!-- Result -->
-    <div id="euclidean-result"></div>
-  </div>
-
-  <!-- Factorization of x -->
-  <div class="algo" id="factorization">
-    <h1>Factorisation de n</h1>
-    <form action="javascript:void(0)">
-      <label>x = <input type="number" required></label>
-      <br>
-      <button type="submit">Trouver la factorisation !</button>
-    </form>
-
-    <!-- Result -->
-    <div></div>
-  </div>
-
-  <!-- Equation in (ℤ/nℤ, ⊕, ⊙) -->
-  <div class="algo" id="equation-product">
-    <h1>Equation dans (ℤ/nℤ, ⊕, ⊙)</h1>
-    <form action="javascript:void(0)">
-      <label>ℤ/<input type="number" required>ℤ</label>
-      <br>
-
-      <label><input class="overline" type="number" required></label>
-      ⊙
-      <label class="overline">x</label>
-      =
-      <label><input class="overline" type="number" required></label>
-
-      <br>
-      <button type="submit">Résoudre l'équation !</button>
-    </form>
-
-    <!-- Result -->
-    <div></div>
-  </div>
-
-  <!-- In (ℤ/nℤ, ⊕, ⊙), inverse of a number -->
-  <div class="algo" id="find-inverse">
-    <h1>Inverse de <span class="overline">x</span> dans (ℤ/nℤ, ⊕, ⊙)</h1>
-    <div>x doit être premier avec n pour être inversible.</div>
-    <form action="javascript:void(0)">
-      <label>ℤ/<input type="number" required>ℤ</label>
-      <br>
-      <label><span class="overline">x</span> = <input class="overline" type="number" required></label>
-      <br>
-      <button type="submit">Trouver les premiers !</button>
-    </form>
-
-    <!-- Result -->
-    <div></div>
-  </div>
-
-  <!-- In (ℤ/nℤ, ⊕, ⊙), list of numbers prime with n - which are numbers with an inverse -->
-  <div class="algo" id="primes-list">
-    <h1>Nombres premiers avec n dans (ℤ/nℤ, ⊕, ⊙)</h1>
-    <div>Ces nombres sont aussi les nombres inversibles dans l'anneau.</div>
-    <form action="javascript:void(0)">
-      <label>ℤ/<input type="number" required>ℤ</label>
-      <br>
-      <button type="submit">Trouver les premiers !</button>
-    </form>
-
-    <!-- Result -->
-    <div></div>
-  </div>
-
-  <!-- In (ℤ/nℤ, ⊕, ⊙), size of R_n -->
-  <div class="algo" id="phi">
-    <h1>φ - Nombre d'inversibles dans (ℤ/nℤ, ⊕, ⊙)</h1>
-    <div>φ représente la taille de R<sub>n</sub>, l'ensemble des nombres inversibles dans (ℤ/nℤ, ⊕, ⊙).<br>
-         C'est aussi le nombre d'entiers premiers avec n dans l'anneau (ℤ/nℤ, ⊕, ⊙).
+      <!-- Result -->
+      <div id="euclidean-result"></div>
     </div>
-    <form action="javascript:void(0)">
-      <label>ℤ/<input type="number" required>ℤ</label>
-      <br>
-      <button type="submit">Trouver les premiers !</button>
-    </form>
 
-    <!-- Result -->
-    <div></div>
+    <!-- Factorization of x -->
+    <div class="algo" id="factorization">
+      <h1>Factorisation de n</h1>
+      <form action="javascript:void(0)">
+        <label>x = <input type="number" required></label>
+        <br>
+        <button type="submit">Trouver la factorisation !</button>
+      </form>
+
+      <!-- Result -->
+      <div></div>
+    </div>
+
+    <!-- Equation in (ℤ/nℤ, ⊕, ⊙) -->
+    <div class="algo" id="equation-product">
+      <h1>Equation dans (ℤ/nℤ, ⊕, ⊙)</h1>
+      <form action="javascript:void(0)">
+        <label>ℤ/<input type="number" required>ℤ</label>
+        <br>
+
+        <label><input class="overline" type="number" required></label>
+        ⊙
+        <label class="overline">x</label>
+        =
+        <label><input class="overline" type="number" required></label>
+
+        <br>
+        <button type="submit">Résoudre l'équation !</button>
+      </form>
+
+      <!-- Result -->
+      <div></div>
+    </div>
+
+    <!-- In (ℤ/nℤ, ⊕, ⊙), inverse of a number -->
+    <div class="algo" id="find-inverse">
+      <h1>Inverse de <span class="overline">x</span> dans (ℤ/nℤ, ⊕, ⊙)</h1>
+      <div>x doit être premier avec n pour être inversible.</div>
+      <form action="javascript:void(0)">
+        <label>ℤ/<input type="number" required>ℤ</label>
+        <br>
+        <label><span class="overline">x</span> = <input class="overline" type="number" required></label>
+        <br>
+        <button type="submit">Trouver les premiers !</button>
+      </form>
+
+      <!-- Result -->
+      <div></div>
+    </div>
+
+    <!-- In (ℤ/nℤ, ⊕, ⊙), list of numbers prime with n - which are numbers with an inverse -->
+    <div class="algo" id="primes-list">
+      <h1>Nombres premiers avec n dans (ℤ/nℤ, ⊕, ⊙)</h1>
+      <div>Ces nombres sont aussi les nombres inversibles dans l'anneau.</div>
+      <form action="javascript:void(0)">
+        <label>ℤ/<input type="number" required>ℤ</label>
+        <br>
+        <button type="submit">Trouver les premiers !</button>
+      </form>
+
+      <!-- Result -->
+      <div></div>
+    </div>
+
+    <!-- In (ℤ/nℤ, ⊕, ⊙), size of R_n -->
+    <div class="algo" id="phi">
+      <h1>φ - Nombre d'inversibles dans (ℤ/nℤ, ⊕, ⊙)</h1>
+      <div>φ représente la taille de R<sub>n</sub>, l'ensemble des nombres inversibles dans (ℤ/nℤ, ⊕, ⊙).<br>
+           C'est aussi le nombre d'entiers premiers avec n dans l'anneau (ℤ/nℤ, ⊕, ⊙).
+      </div>
+      <form action="javascript:void(0)">
+        <label>ℤ/<input type="number" required>ℤ</label>
+        <br>
+        <button type="submit">Trouver les premiers !</button>
+      </form>
+
+      <!-- Result -->
+      <div></div>
+    </div>
   </div>
 
+  <script>
+    let navs = $('.nav-item')
+    let algos = $('.algo')
+    let navbar = $('#navbar')
+
+    navs.click(function (event) {
+      event.preventDefault()
+      navs.removeClass('active')
+      $(this).addClass('active')
+
+      let target = $(this.hash)
+      algos.removeClass('active')
+      target.addClass('active')
+
+      $('html,body').animate({
+        scrollTop: target.offset().top - navbar.outerHeight() - 7
+      }, 500)
+    })
+  </script>
 </body>
 
 </html>
