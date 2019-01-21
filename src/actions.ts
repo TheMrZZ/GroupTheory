@@ -148,7 +148,7 @@ export function createFindPrimes () {
     const n = inputValue(getChildrenByTagName(form, 'input')[0])
     const primes = findAllPrimes(n)
 
-    let result = `Les nombres premiers (et inversibles) dans (ℤ/${n}ℤ, ⊕, ⊙) sont:<br>`
+    let result = 'Nombres dans ℝ<sub>n</sub> :<br>'
     result += '[' + primes.map(p => `<span class="overline">${p}</span>`).join(', ') + ']<br>'
     result += `On en déduit que φ = ${primes.length}`
     resultDiv.innerHTML = result
