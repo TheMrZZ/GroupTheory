@@ -24,6 +24,7 @@
     <a class="nav-item nav-link" href="#find-inverse">Inverse de <span class="overline">x</span></a>
     <a class="nav-item nav-link" href="#primes-list">Nombres premiers avec n</a>
     <a class="nav-item nav-link" href="#phi">φ - Nombre d'inversibles</a>
+    <a class="nav-item nav-link" href="#power">Puissance</a>
   </nav>
 
   <div>
@@ -84,7 +85,7 @@
         <br>
         <label><span class="overline">x</span> = <input class="overline" type="number" required></label>
         <br>
-        <button type="submit">Trouver les premiers !</button>
+        <button type="submit">Trouver l'inverse !</button>
       </form>
 
       <!-- Result -->
@@ -105,7 +106,7 @@
       <div></div>
     </div>
 
-    <!-- In (ℤ/nℤ, ⊕, ⊙), size of R_n -->
+    <!-- In (ℤ/nℤ, ⊕, ⊙), φ = size of R_n -->
     <div class="algo" id="phi">
       <h1>φ - Nombre d'inversibles dans (ℤ/nℤ, ⊕, ⊙)</h1>
       <div>φ représente la taille de R<sub>n</sub>, l'ensemble des nombres inversibles dans (ℤ/nℤ, ⊕, ⊙).<br>
@@ -114,7 +115,23 @@
       <form action="javascript:void(0)">
         <label>ℤ/<input type="number" required>ℤ</label>
         <br>
-        <button type="submit">Trouver les premiers !</button>
+        <button type="submit">Trouver phi !</button>
+      </form>
+
+      <!-- Result -->
+      <div></div>
+    </div>
+
+    <!-- a^b = x, with huge a and huge b, in (ℤ/nℤ, ⊕, ⊙) - find b -->
+    <div class="algo" id="power">
+      <h1>Puissances dans (ℤ/nℤ, ⊕, ⊙)</h1>
+      <form action="javascript:void(0)">
+        <label>ℤ/<input type="number" required>ℤ</label><br>
+        <label><input class="overline" type="number" required></label
+        ><label><sup><sup><input type="number" required></sup></sup></label>
+        = <span class="overline">x</span>
+        <br>
+        <button type="submit">Trouver x !</button>
       </form>
 
       <!-- Result -->

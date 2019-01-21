@@ -106,28 +106,97 @@ export function findAllPrimes (n: number) {
 }
 
 // Find all prime factors of a number
-function primeFactorizationRec (n: number, result: number[][]): number[][] {
-  const root = Math.sqrt(n)
-  let factor = 2
-
-  if (n % factor) {
-    factor = 3
-
-    while ((n % factor) && ((factor = (factor + 2)) < root)) {}
+export function primeFactorization (x: number) {
+  function findFactors (x: number, factor: number) {
+    let power = 0
+    while (x % factor === 0) {
+      x /= factor
+      power++
+    }
+    return [x, power]
   }
 
-  factor = (factor <= root) ? factor : n
+  let result = [], factor = 3, diff = 2, power
 
-  if (result.length < 1 || result.get(-1)[0] !== factor) {
-    result.push([factor, 1])
-  } else {
-    result.get(-1)[1]++
+  [x, power] = findFactors(x, 2)
+  if (power > 0) {
+    result.push([2, power])
   }
 
-  return (factor === n) ? result : primeFactorizationRec((n / factor), result)
+  while (x !== 1 && factor < 105) {
+    [x, power] = findFactors(x, factor)
+
+    if (power > 0) {
+      result.push([factor, power])
+    }
+
+    factor += diff
+    diff = 6 - diff
+  }
+
+  return result
 }
 
-// Find all prime factors of a number
-export function primeFactorization (x: number) {
-  return primeFactorizationRec(x, [])
+/* Returns the binary decomposition of a number : 27 => [16, 8, 2, 1]*/
+function getBinaryDecomposition (x: number) {
+  let binaryRepresentation = x.toString(2)
+  let powerOfTwo = 1, result = []
+
+  for (let i = binaryRepresentation.length - 1; i >= 0; i--) {
+    if (binaryRepresentation[i] === '1') {
+      result.push(powerOfTwo)
+    }
+
+    powerOfTwo *= 2
+  }
+
+  return result
+}
+
+/* Find the result of a^power in (ℤ/nℤ, ⊕, ⊙)
+ * Return an object of 3 arrays.
+ * First is the binary decomposition of the number : 27 = [16, 8, 2, 1]
+ *
+ * Second is actual powers of a.
+ * For findPower(15, 27, 55):
+ *    [1, 15], meaning 15^1 % 55 = 15
+ *    [2, 04], meaning 15^2 % 55 = 4 etc...
+ *
+ * Third is the calculation:
+ * For findPower(15, 27, 55):
+ *    [31, 36, 4, 13], meaning their product
+ *    [16, 4, 13],
+ *    [9, 13],
+ *    [7]
+ * */
+export function findPower (a: number, power: number, n: number) {
+  let binaryDecomposition = getBinaryDecomposition(power)
+
+  let actualPowers: [number, number][] = []
+  let products: number[][] = [[]]
+  let powerOfTwo = 1, intermediateResult = a
+
+
+  // Calculation of the powers
+  while (powerOfTwo <= power) {
+    actualPowers.push([powerOfTwo, intermediateResult])
+
+    if (binaryDecomposition.includes(powerOfTwo)) {
+      products[0].push(intermediateResult)
+    }
+
+    powerOfTwo *= 2
+    intermediateResult = intermediateResult * intermediateResult % n
+  }
+
+  // Calculation of the products
+  while (products.get(-1).length !== 1) {
+    let previousProduct = products.get(-1)
+    let newProduct = [previousProduct[0] * previousProduct[1] % n]
+    newProduct.push(...previousProduct.slice(2))
+
+    products.push(newProduct)
+  }
+
+  return { binaryDecomposition, powers: actualPowers, products }
 }

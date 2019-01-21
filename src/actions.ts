@@ -3,7 +3,8 @@ import {
   resolveEquationProduct,
   inverse,
   findAllPrimes,
-  primeFactorization
+  primeFactorization,
+  findPower
 } from './algorithms'
 import { u, v, r } from './constants'
 
@@ -78,7 +79,9 @@ export function createFactorization () {
     const result = primeFactorization(x)
 
     resultDiv.innerHTML = `
-    ${x} = ${result.map(l => l[0] + '<sup>' + l[1] + '</sup>').join(' × ')}
+    ${x} = ${result.map(l => l[0] + '<sup>' + l[1] + '</sup>').join(' × ')}<br>
+    Nombre de diviseurs = ${result.map(l => l[1] + 1).join(' × ')}<br>
+    Nombre de diviseurs = ${result.reduce((product, l) => product * (l[1] + 1), 1)}
     `
   }
 }
@@ -149,6 +152,8 @@ export function createFindPrimes () {
     result += '[' + primes.map(p => `<span class="overline">${p}</span>`).join(', ') + ']<br>'
     result += `On en déduit que φ = ${primes.length}`
     resultDiv.innerHTML = result
+
+    primesListElement.scrollIntoView()
   }
 }
 
@@ -168,5 +173,49 @@ export function createPhi () {
       φ = ${x} × ${factors.map(factor => `(1 - 1/${factor[0]})`).join(' × ')} <br>
       φ = ${Math.round(phi)}
     `
+  }
+}
+
+export function createPower () {
+  const powerElement = document.getElementById('power') as HTMLDivElement
+  const form = getChildrenByTagName(powerElement, 'form')[0] as HTMLFormElement
+  const resultDiv = getChildrenByTagName(powerElement, 'div')[0] as HTMLDivElement
+
+  form.onsubmit = function () {
+    resultDiv.innerHTML = ''
+
+    const n = inputValue(getChildrenByTagName(form, 'input')[0])
+    const x = inputValue(getChildrenByTagName(form, 'input')[1])
+    const power = inputValue(getChildrenByTagName(form, 'input')[2])
+
+    const { binaryDecomposition, powers, products } = findPower(x, power, n)
+
+    /* 13^1 = 13
+     * 13^2 = 4
+     * 13^4 = 16 */
+    for (const [power, result] of powers) {
+      resultDiv.innerHTML += `<span class="overline">${x}</span><sup>${power}</sup>
+                              = <span class="overline">${result}</span><br>`
+    }
+
+    resultDiv.innerHTML += '<hr>'
+
+    // 27 = 1 + 2 + 8 + 16
+    resultDiv.innerHTML += `${power} = ${binaryDecomposition.join(' + ')}`
+
+    resultDiv.innerHTML += '<hr>'
+
+    // 13^27 = 13^16 * 13^8 * 13^2 * 13^1
+    resultDiv.innerHTML += `<span class="overline">${x}</span><sup>${power}</sup> = `
+    resultDiv.innerHTML += powers.filter(([power]) => binaryDecomposition.includes(power))
+                                 .map(([power]) => `<span class="overline">${x}</span><sup>${power}</sup>`)
+                                 .join(' × ')
+                           + '<br>'
+
+    // 13^27 = 31 * 36 * 4 * 13 = 16 * 4 * 13 = 9 * 13 = 7
+    for (const product of products) {
+      resultDiv.innerHTML += `<span class="overline">${x}</span><sup>${power}</sup> = `
+      resultDiv.innerHTML += `${product.map(i => `<span class="overline">${i}</span>`).join(' × ')}<br>`
+    }
   }
 }

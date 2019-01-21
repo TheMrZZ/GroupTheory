@@ -7,7 +7,8 @@ import {
   createFindInverse,
   createFindPrimes,
   createFactorization,
-  createPhi
+  createPhi,
+  createPower
 } from './actions'
 
 function resizeInputs () {
@@ -28,5 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
   createFindInverse()
   createFindPrimes()
   createPhi()
+  createPower()
   resizeInputs()
 })
