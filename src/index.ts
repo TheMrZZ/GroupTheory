@@ -8,16 +8,19 @@ import {
   createFindPrimes,
   createFactorization,
   createPhi,
-  createPower
+  createPower,
+  createFindOrder
 } from './actions'
 
 function resizeInputs () {
   for (const input of document.getElementsByTagName('input')) {
-    let resize = function () {
-      input.style.width = Math.max(1, input.value.length) + 'em'
+    if (input.type.toLowerCase() === 'number') {
+      let resize = function () {
+        input.style.width = Math.max(1, input.value.length) + 'em'
+      }
+      input.oninput = resize
+      resize()
     }
-    input.oninput = resize
-    resize()
   }
 }
 
@@ -30,5 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
   createFindPrimes()
   createPhi()
   createPower()
+  createFindOrder()
   resizeInputs()
 })

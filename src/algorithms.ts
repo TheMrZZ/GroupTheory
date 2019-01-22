@@ -1,4 +1,4 @@
-import { u, q, r, v } from './constants'
+import { Law, q, r, u, v } from './constants'
 
 declare global {
   interface Array<T> {
@@ -116,22 +116,21 @@ export function primeFactorization (x: number) {
     return [x, power]
   }
 
-  let result = [], factor = 3, diff = 2, power
+  let result = [], factor = 3, power
 
   [x, power] = findFactors(x, 2)
   if (power > 0) {
     result.push([2, power])
   }
 
-  while (x !== 1 && factor < 105) {
+  while (x !== 1) {
     [x, power] = findFactors(x, factor)
 
     if (power > 0) {
       result.push([factor, power])
     }
 
-    factor += diff
-    diff = 6 - diff
+    factor += 2
   }
 
   return result
@@ -176,7 +175,6 @@ export function findPower (a: number, power: number, n: number) {
   let products: number[][] = [[]]
   let powerOfTwo = 1, intermediateResult = a
 
-
   // Calculation of the powers
   while (powerOfTwo <= power) {
     actualPowers.push([powerOfTwo, intermediateResult])
@@ -199,4 +197,31 @@ export function findPower (a: number, power: number, n: number) {
   }
 
   return { binaryDecomposition, powers: actualPowers, products }
+}
+
+export function getOrder (x: number, n: number, law: Law) {
+  const neutral = law === Law.ADDITION ? 0 : 1
+  const operator = law === Law.ADDITION ? (a: number, b: number) => a + b : (a: number, b: number) => a * b
+
+  if (x === neutral) {
+    return 1
+  }
+
+  let order = 1
+  let result = x, oldResults = []
+
+  while (result !== neutral) {
+    oldResults.push(result)
+    result = operator(result, x) % n
+    order++
+
+    console.log(result, order)
+
+    // It's a loop!
+    if (result === x || oldResults.includes(result)) {
+      return null
+    }
+  }
+
+  return order
 }

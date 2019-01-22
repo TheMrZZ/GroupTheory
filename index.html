@@ -94,14 +94,27 @@
 
     <!-- In (ℤ/nℤ, ⊕, ⊙), list of numbers prime with n - which are numbers with an inverse -->
     <div class="algo" id="find-order">
+      <h1>Ordre de x</h1>
+      <form action="javascript:void(0)">
+        <label>ℤ/<input type="number" required>ℤ</label>
+        <br>
+        <label><span class="overline">x</span> = <input class="overline" type="number" required></label>
+        <br>
+        <label> Loi additive ⊕ <input type="radio" name="law" value="addition"></label><br>
+        <label> Loi multiplicative ⊙ <input type="radio" name="law" value="multiplication"></label><br>
+        <button type="submit">Trouver les premiers !</button>
+      </form>
 
+      <!-- Result -->
+      <div></div>
     </div>
 
     <!-- ℝ_n => In (ℤ/nℤ, ⊕, ⊙), list of numbers prime with n - which are numbers with an inverse -->
     <div class="algo" id="primes-list">
       <h1>Ensemble ℝ<sub>n</sub></h1>
       <div>Nombres premiers avec n dans (ℤ/nℤ, ⊕, ⊙) <br>
-           Ces nombres sont aussi les nombres inversibles dans l'anneau.</div>
+           Ces nombres sont aussi les nombres inversibles dans l'anneau.
+      </div>
       <form action="javascript:void(0)">
         <label>ℤ/<input type="number" required>ℤ</label>
         <br>

@@ -1,12 +1,13 @@
 import {
   euclideanExtendedAlgorithm,
-  resolveEquationProduct,
-  inverse,
   findAllPrimes,
+  findPower,
+  getOrder,
+  inverse,
   primeFactorization,
-  findPower
+  resolveEquationProduct
 } from './algorithms'
-import { u, v, r } from './constants'
+import { Law, r, u, v } from './constants'
 
 function getChildrenByTagName (element: HTMLElement, tagName: string) {
   return (
@@ -138,7 +139,31 @@ export function createFindInverse () {
   }
 }
 
-// Find all numbers prime with n in (ℤ/nℤ, ⊕, ⊙)
+export function createFindOrder () {
+  const findOrderDiv = document.getElementById('find-order') as HTMLDivElement
+  const form = getChildrenByTagName(findOrderDiv, 'form')[0] as HTMLFormElement
+  const resultDiv = getChildrenByTagName(findOrderDiv, 'div')[0]
+
+  form.onsubmit = function () {
+    const n = inputValue(getChildrenByTagName(findOrderDiv, 'input')[0])
+    const x = inputValue(getChildrenByTagName(findOrderDiv, 'input')[1])
+    let lawValue =
+      Array
+        .from(findOrderDiv.getElementsByTagName('input'))
+        .filter(e => e.checked)[0].value
+
+    const law = lawValue.toLowerCase() === 'addition' ? Law.ADDITION : Law.MULTIPLICATION
+    const order = getOrder(x, n, law)
+
+    if (order !== null) {
+      resultDiv.innerHTML = `Ordre de <span class="overline">${x}</span> (${lawValue}): ${order}`
+    } else {
+      resultDiv.innerHTML = `<span class="overline">${x}</span> n'a pas d'ordre ! (${lawValue})`
+    }
+  }
+}
+
+// Find all numbers in Rn prime with n in (ℤ/nℤ, ⊕, ⊙)
 export function createFindPrimes () {
   const primesListElement = document.getElementById('primes-list') as HTMLDivElement
   const form = getChildrenByTagName(primesListElement, 'form')[0] as HTMLFormElement
@@ -166,6 +191,7 @@ export function createPhi () {
   form.onsubmit = function () {
     const x = inputValue(getChildrenByTagName(form, 'input')[0])
     const factors = primeFactorization(x)
+    console.log('Factors:', factors)
     const phi = factors.reduce((phi, factor) => phi * (1 - 1 / factor[0]), 1) * x
 
     resultDiv.innerHTML = `
